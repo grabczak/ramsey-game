@@ -1,17 +1,36 @@
-let ctx = null;
+let canvas = null;
+let context = null;
+let input = null;
 
-const n = 10;
 const r = 200;
+let n = 6;
+
+function run() {
+  canvas = document.getElementById("canvas");
+  context = canvas.getContext("2d");
+
+  input = document.getElementById("input");
+  input.addEventListener("input", e => {
+    const value = e.target.value;
+
+    if (value >= 3 && value <= 25) {
+      n = value;
+      draw();
+    }
+  });
+
+  draw();
+}
 
 function draw() {
-  ctx = document.getElementById("canvas").getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
 
   const points = [];
 
   for (let i = 0; i < n; i++) {
     points.push({
-      x: r * Math.cos((2 * Math.PI * i) / n) + 250,
-      y: -r * Math.sin((2 * Math.PI * i) / n) + 250
+      x: r * Math.cos((2 * Math.PI * i) / n) + canvas.width / 2,
+      y: -r * Math.sin((2 * Math.PI * i) / n) + canvas.width / 2
     });
   }
 
@@ -27,20 +46,20 @@ function draw() {
 }
 
 function drawLine(a, b) {
-  ctx.beginPath();
-  ctx.strokeStyle = "#CCCCCC";
-  ctx.moveTo(a.x, a.y);
-  ctx.lineTo(b.x, b.y);
-  ctx.stroke();
+  context.beginPath();
+  context.strokeStyle = "#CCCCCC";
+  context.moveTo(a.x, a.y);
+  context.lineTo(b.x, b.y);
+  context.stroke();
 }
 
 function drawCircle(a, i) {
-  ctx.beginPath();
-  ctx.fillStyle = "#000000";
-  ctx.arc(a.x, a.y, 10, 0, 2 * Math.PI);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.fillStyle = "#FFFFFF";
-  ctx.fillText(i, a.x - 3, a.y + 3.5);
-  ctx.fill();
+  context.beginPath();
+  context.fillStyle = "#000000";
+  context.arc(a.x, a.y, 10, 0, 2 * Math.PI);
+  context.fill();
+  context.beginPath();
+  context.fillStyle = "#FFFFFF";
+  context.fillText(i, a.x - 3, a.y + 3.5);
+  context.fill();
 }
