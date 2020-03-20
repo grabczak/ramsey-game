@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ramsey-game/precache-manifest.b0637543795be765d5145c72f0b9a477.js"
+  "/ramsey-game/precache-manifest.861cf3373a17db6dda63a5c3011f75dc.js"
 );
 
 self.addEventListener('message', (event) => {
