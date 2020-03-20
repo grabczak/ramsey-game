@@ -1,7 +1,9 @@
 import React from 'react';
+import './Graph.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Graph as ReactD3Graph } from 'react-d3-graph';
 
+import { Node } from '../Node';
 import { RootState } from '../../redux/store';
 import { addEdge, createGraph } from '../../redux/actions/graph';
 
@@ -11,9 +13,8 @@ export function Graph() {
 
   const config = {
     node: {
-      color: 'black',
-      size: 100,
-      // viewGenerator:
+      renderLabel: false,
+      viewGenerator: (node: any) => <Node id={node.id} />,
     },
     link: {
       highlightColor: 'green',
@@ -23,7 +24,6 @@ export function Graph() {
     staticGraph: true,
     width: 500,
     height: 500,
-    collapsible: true,
   };
 
   const onClickLink = function(source: string, target: string) {
@@ -31,13 +31,14 @@ export function Graph() {
   };
 
   return (
-    <>
+    <div className="Graph">
+      <p>{graph.nodes.length}</p>
       <input
         type="range"
         value={graph.nodes.length}
         onChange={e => dispatch(createGraph(Number(e.target.value)))}
         min="5"
-        max="10"
+        max="15"
       />
       <ReactD3Graph
         id="graph"
@@ -45,6 +46,6 @@ export function Graph() {
         config={config}
         onClickLink={onClickLink}
       />
-    </>
+    </div>
   );
 }
