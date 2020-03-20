@@ -11,15 +11,19 @@ export function Graph() {
   };
 
   const config = {
-    nodeHighlightBehavior: true,
+    linkHighlightBehavior: true,
     node: {
-      color: 'lightgreen',
-      size: 120,
-      highlightStrokeColor: 'blue',
+      color: 'black',
+      size: 350,
+      // viewGenerator:
     },
     link: {
-      highlightColor: 'lightblue',
+      highlightColor: 'green',
+      strokeWidth: 5,
     },
+    // staticGraph: true,
+    // width: 500,
+    // height: 500
   };
 
   const onClickLink = function(source: any, target: any) {
