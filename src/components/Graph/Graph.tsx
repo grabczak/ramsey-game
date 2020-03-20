@@ -1,51 +1,50 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Graph as ReactD3Graph } from 'react-d3-graph';
 
+import { RootState } from '../../redux/store';
+import { addEdge, createGraph } from '../../redux/actions/graph';
+
 export function Graph() {
-  const data = {
-    nodes: [{ id: 'Harry' }, { id: 'Sally' }, { id: 'Alice' }],
-    links: [
-      { source: 'Harry', target: 'Sally' },
-      { source: 'Harry', target: 'Alice' },
-    ],
-  };
+  const graph = useSelector((state: RootState) => state.graph);
+  const dispatch = useDispatch();
 
   const config = {
-    linkHighlightBehavior: true,
     node: {
       color: 'black',
-      size: 350,
+      size: 100,
       // viewGenerator:
     },
     link: {
       highlightColor: 'green',
-      strokeWidth: 5,
+      strokeWidth: 2,
     },
-    // staticGraph: true,
-    // width: 500,
-    // height: 500
+    linkHighlightBehavior: true,
+    staticGraph: true,
+    width: 500,
+    height: 500,
+    collapsible: true,
   };
 
-  const onClickLink = function(source: any, target: any) {
-    console.log(`Clicked link between ${source} and ${target}`);
-  };
-
-  const onMouseOverLink = function(source: any, target: any) {
-    console.log(`Mouse over in link between ${source} and ${target}`);
-  };
-
-  const onMouseOutLink = function(source: any, target: any) {
-    console.log(`Mouse out link between ${source} and ${target}`);
+  const onClickLink = function(source: string, target: string) {
+    dispatch(addEdge(source, target));
   };
 
   return (
-    <ReactD3Graph
-      id="graph"
-      data={data}
-      config={config}
-      onClickLink={onClickLink}
-      onMouseOverLink={onMouseOverLink}
-      onMouseOutLink={onMouseOutLink}
-    />
+    <>
+      <input
+        type="range"
+        value={graph.nodes.length}
+        onChange={e => dispatch(createGraph(Number(e.target.value)))}
+        min="5"
+        max="10"
+      />
+      <ReactD3Graph
+        id="graph"
+        data={graph}
+        config={config}
+        onClickLink={onClickLink}
+      />
+    </>
   );
 }
