@@ -20,7 +20,7 @@ export function Graph() {
       highlightColor: 'green',
       strokeWidth: 2,
     },
-    linkHighlightBehavior: true,
+    // linkHighlightBehavior: true,
     staticGraph: true,
     width: 500,
     height: 500,
