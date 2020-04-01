@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/ramsey-game/static/css/main.f9d02e28.chunk.css",
-    "main.js": "/ramsey-game/static/js/main.5569cf8f.chunk.js",
-    "main.js.map": "/ramsey-game/static/js/main.5569cf8f.chunk.js.map",
+    "main.js": "/ramsey-game/static/js/main.dcb01ff0.chunk.js",
+    "main.js.map": "/ramsey-game/static/js/main.dcb01ff0.chunk.js.map",
     "runtime-main.js": "/ramsey-game/static/js/runtime-main.2190bb8a.js",
     "runtime-main.js.map": "/ramsey-game/static/js/runtime-main.2190bb8a.js.map",
     "static/js/2.ca926c93.chunk.js": "/ramsey-game/static/js/2.ca926c93.chunk.js",
     "static/js/2.ca926c93.chunk.js.map": "/ramsey-game/static/js/2.ca926c93.chunk.js.map",
     "index.html": "/ramsey-game/index.html",
-    "precache-manifest.861cf3373a17db6dda63a5c3011f75dc.js": "/ramsey-game/precache-manifest.861cf3373a17db6dda63a5c3011f75dc.js",
+    "precache-manifest.b1a3d1b4d8a3091caec2a48c629ad25f.js": "/ramsey-game/precache-manifest.b1a3d1b4d8a3091caec2a48c629ad25f.js",
     "service-worker.js": "/ramsey-game/service-worker.js",
     "static/css/main.f9d02e28.chunk.css.map": "/ramsey-game/static/css/main.f9d02e28.chunk.css.map",
     "static/js/2.ca926c93.chunk.js.LICENSE.txt": "/ramsey-game/static/js/2.ca926c93.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.2190bb8a.js",
     "static/js/2.ca926c93.chunk.js",
     "static/css/main.f9d02e28.chunk.css",
-    "static/js/main.5569cf8f.chunk.js"
+    "static/js/main.dcb01ff0.chunk.js"
   ]
 }
