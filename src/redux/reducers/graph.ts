@@ -24,6 +24,8 @@ const initialState: GraphState = {
   ...createGraph(7),
 };
 
+let x = false;
+
 export function graph(state = initialState, action: GraphAction): GraphState {
   switch (action.type) {
     case CREATE_GRAPH:
@@ -32,6 +34,7 @@ export function graph(state = initialState, action: GraphAction): GraphState {
         ...createGraph(action.payload.size),
       };
     case ADD_EDGE:
+      x = !x;
       return {
         ...state,
         links: [
@@ -43,7 +46,7 @@ export function graph(state = initialState, action: GraphAction): GraphState {
           {
             source: action.payload.source,
             target: action.payload.target,
-            color: 'green',
+            color: x ? 'green' : 'red',
           },
         ],
       };
