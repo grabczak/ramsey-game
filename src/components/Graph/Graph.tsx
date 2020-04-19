@@ -26,7 +26,7 @@ export function Graph() {
     height: 500,
   };
 
-  const onClickLink = function(source: string, target: string) {
+  const onClickLink = function (source: string, target: string) {
     dispatch(addEdge(source, target));
   };
 
@@ -36,9 +36,9 @@ export function Graph() {
       <input
         type="range"
         value={graph.nodes.length}
-        onChange={e => dispatch(createGraph(Number(e.target.value)))}
-        min="5"
-        max="15"
+        onChange={(e) => dispatch(createGraph(Number(e.target.value)))}
+        min="4"
+        max="10"
       />
       <ReactD3Graph
         id="graph"
