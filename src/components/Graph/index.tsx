@@ -5,7 +5,7 @@ import { Graph as ReactD3Graph } from 'react-d3-graph';
 
 import { Node } from '../Node';
 import { TRootState } from '../../redux/store';
-import { addEdge, createGraph } from '../../redux/actions/graph';
+import { nextMove, createGraph } from '../../redux/actions/graph';
 
 export function Graph() {
   const graph = useSelector((state: TRootState) => state.graph);
@@ -27,7 +27,7 @@ export function Graph() {
   };
 
   const onClickLink = function (source: string, target: string) {
-    dispatch(addEdge(source, target));
+    dispatch(nextMove(source, target));
   };
 
   return (

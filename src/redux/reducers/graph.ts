@@ -68,7 +68,7 @@ function createGraph(size: number) {
 
   for (const a of nodes) {
     for (const b of nodes) {
-      if (Number(a.id) <= Number(b.id)) {
+      if (Number(a.id) < Number(b.id)) {
         links.push({
           source: a.id,
           target: b.id,
