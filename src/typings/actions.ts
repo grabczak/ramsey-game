@@ -1,4 +1,22 @@
-import { ADD_EDGE, CREATE_GRAPH } from '../constants/actions';
+import {
+  ADD_EDGE,
+  SET_GRAPH_SIZE,
+  SET_TARGET_CLIQUE_SIZE,
+} from '../constants/actions';
+
+export type TSetGraphSize = {
+  type: typeof SET_GRAPH_SIZE;
+  payload: {
+    size: number;
+  };
+};
+
+export type TSetTargetCliqueSize = {
+  type: typeof SET_TARGET_CLIQUE_SIZE;
+  payload: {
+    size: number;
+  };
+};
 
 export type TAddEdge = {
   type: typeof ADD_EDGE;
@@ -9,11 +27,5 @@ export type TAddEdge = {
   };
 };
 
-export type TCreateGraph = {
-  type: typeof CREATE_GRAPH;
-  payload: {
-    size: number;
-  };
-};
-
-export type TGraphAction = TCreateGraph | TAddEdge;
+export type TGraphAction = TSetGraphSize | TAddEdge;
+export type TOptionsAction = TSetGraphSize | TSetTargetCliqueSize;

@@ -15,6 +15,12 @@ export type TGraphState = {
   links: Array<TLink>;
 };
 
+export type TOptionsState = {
+  graphSize: number;
+  targetCliqueSize: number;
+};
+
 export type TRootState = {
   graph: TGraphState;
+  options: TOptionsState;
 };

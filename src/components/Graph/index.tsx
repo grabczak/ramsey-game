@@ -5,10 +5,17 @@ import { Graph as ReactD3Graph } from 'react-d3-graph';
 
 import { Node } from '../Node';
 import { TRootState } from '../../typings/state';
-import { nextMove, createGraph } from '../../redux/actions/graph';
+import { nextMove } from '../../redux/actions/graph';
+
+import { setGraphSize, setTargetCliqueSize } from '../../redux/actions/options';
 
 export function Graph() {
-  const graph = useSelector((state: TRootState) => state.graph);
+  const { graphSize, targetCliqueSize } = useSelector(
+    (state: TRootState) => state.options,
+  );
+
+  const { graph } = useSelector((state: TRootState) => state);
+
   const dispatch = useDispatch();
 
   const config = {
@@ -26,19 +33,27 @@ export function Graph() {
     height: 500,
   };
 
-  const onClickLink = function (source: string, target: string) {
+  const onClickLink = (source: string, target: string) => {
     dispatch(nextMove(source, target));
   };
 
   return (
     <div className="Graph">
-      <p>{graph.nodes.length}</p>
+      <p>{graphSize}</p>
       <input
         type="range"
-        value={graph.nodes.length}
-        onChange={(e) => dispatch(createGraph(Number(e.target.value)))}
-        min="4"
-        max="10"
+        value={graphSize}
+        onChange={(e) => dispatch(setGraphSize(Number(e.target.value)))}
+        min={4}
+        max={10}
+      />
+      <p>{targetCliqueSize}</p>
+      <input
+        type="range"
+        value={targetCliqueSize}
+        onChange={(e) => dispatch(setTargetCliqueSize(Number(e.target.value)))}
+        min={3}
+        max={graphSize}
       />
       <ReactD3Graph
         id="graph"

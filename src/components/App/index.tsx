@@ -9,6 +9,7 @@ export function App() {
   return (
     <Provider store={store}>
       <div className="App">
+        <h1>Gra Ramseya</h1>
         <Graph />
       </div>
     </Provider>

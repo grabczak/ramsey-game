@@ -1,13 +1,13 @@
-import { ADD_EDGE, CREATE_GRAPH } from '../../constants/actions';
+import { ADD_EDGE, SET_GRAPH_SIZE } from '../../constants/actions';
 import { TGraphAction } from '../../typings/actions';
 
 const initialState = {
-  ...createGraph(7),
+  ...createGraph(6),
 };
 
 export function graph(state = initialState, action: TGraphAction) {
   switch (action.type) {
-    case CREATE_GRAPH:
+    case SET_GRAPH_SIZE:
       return {
         ...state,
         ...createGraph(action.payload.size),
