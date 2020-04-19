@@ -1,30 +1,30 @@
 import { ADD_EDGE, CREATE_GRAPH } from '../../constants/actions';
-import { AddEdge, CreateGraph } from '../actions/graph';
+import { TAddEdge, TCreateGraph } from '../actions/graph';
 
-export type Node = {
+export type TNode = {
   id: string;
   x: number;
   y: number;
 };
 
-export type Link = {
+export type TLink = {
   source: string;
   target: string;
   color: string;
 };
 
-export type GraphState = {
-  nodes: Array<Node>;
-  links: Array<Link>;
+export type TGraphState = {
+  nodes: Array<TNode>;
+  links: Array<TLink>;
 };
 
-export type GraphAction = CreateGraph & AddEdge;
+export type TGraphAction = TCreateGraph | TAddEdge;
 
-const initialState: GraphState = {
+const initialState: TGraphState = {
   ...createGraph(7),
 };
 
-export function graph(state = initialState, action: GraphAction): GraphState {
+export function graph(state = initialState, action: TGraphAction): TGraphState {
   switch (action.type) {
     case CREATE_GRAPH:
       return {
@@ -55,8 +55,8 @@ export function graph(state = initialState, action: GraphAction): GraphState {
 function createGraph(size: number) {
   const r = 200;
 
-  const nodes: Array<Node> = [];
-  const links: Array<Link> = [];
+  const nodes: Array<TNode> = [];
+  const links: Array<TLink> = [];
 
   for (let i = 0; i < size; i++) {
     nodes.push({

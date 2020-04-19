@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Graph as ReactD3Graph } from 'react-d3-graph';
 
 import { Node } from '../Node';
-import { RootState } from '../../redux/store';
+import { TRootState } from '../../redux/store';
 import { addEdge, createGraph } from '../../redux/actions/graph';
 
 export function Graph() {
-  const graph = useSelector((state: RootState) => state.graph);
+  const graph = useSelector((state: TRootState) => state.graph);
   const dispatch = useDispatch();
 
   const config = {

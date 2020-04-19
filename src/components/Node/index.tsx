@@ -1,11 +1,11 @@
 import React from 'react';
 import './styles.css';
 
-export type NodeProps = {
+export type TNodeProps = {
   id: string;
 };
 
-export function Node({ id }: NodeProps) {
+export function Node({ id }: TNodeProps) {
   return (
     <div className="Node">
       <p>{Math.floor(Number(id))}</p>

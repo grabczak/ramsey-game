@@ -10,6 +10,6 @@ const logger = createLogger({
   collapsed: true,
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type TRootState = ReturnType<typeof rootReducer>;
 
 export const store = createStore(rootReducer, applyMiddleware(thunk, logger));

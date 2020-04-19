@@ -2,7 +2,7 @@ import { ADD_EDGE, CREATE_GRAPH } from '../../constants/actions';
 
 const jsnx = require('jsnetworkx');
 
-export type CreateGraph = {
+export type TCreateGraph = {
   type: typeof CREATE_GRAPH;
   payload: {
     size: number;
@@ -16,7 +16,7 @@ export const createGraph = (size: number) => {
   };
 };
 
-export type AddEdge = {
+export type TAddEdge = {
   type: typeof ADD_EDGE;
   payload: {
     source: string;
