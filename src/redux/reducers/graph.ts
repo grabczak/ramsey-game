@@ -24,8 +24,6 @@ const initialState: GraphState = {
   ...createGraph(7),
 };
 
-let x = false;
-
 export function graph(state = initialState, action: GraphAction): GraphState {
   switch (action.type) {
     case CREATE_GRAPH:
@@ -34,19 +32,18 @@ export function graph(state = initialState, action: GraphAction): GraphState {
         ...createGraph(action.payload.size),
       };
     case ADD_EDGE:
-      x = !x;
       return {
         ...state,
         links: [
           ...state.links.filter(
-            item =>
+            (item) =>
               item.source !== action.payload.source ||
               item.target !== action.payload.target,
           ),
           {
             source: action.payload.source,
             target: action.payload.target,
-            color: x ? 'green' : 'red',
+            color: 'green',
           },
         ],
       };
@@ -71,14 +68,13 @@ function createGraph(size: number) {
 
   for (const a of nodes) {
     for (const b of nodes) {
-      if (Number(a.id) >= Number(b.id)) {
-        continue;
+      if (Number(a.id) <= Number(b.id)) {
+        links.push({
+          source: a.id,
+          target: b.id,
+          color: '#CCCCCC',
+        });
       }
-      links.push({
-        source: a.id,
-        target: b.id,
-        color: '#CCCCCC',
-      });
     }
   }
 
