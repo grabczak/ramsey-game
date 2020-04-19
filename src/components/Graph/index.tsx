@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Graph as ReactD3Graph } from 'react-d3-graph';
 
 import { Node } from '../Node';
-import { TRootState } from '../../redux/store';
+import { TRootState } from '../../typings/state';
 import { nextMove, createGraph } from '../../redux/actions/graph';
 
 export function Graph() {
