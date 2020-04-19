@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/ramsey-game/static/css/main.1865a723.chunk.css",
-    "main.js": "/ramsey-game/static/js/main.4554147a.chunk.js",
-    "main.js.map": "/ramsey-game/static/js/main.4554147a.chunk.js.map",
+    "main.css": "/ramsey-game/static/css/main.3bc792a1.chunk.css",
+    "main.js": "/ramsey-game/static/js/main.ede1a4be.chunk.js",
+    "main.js.map": "/ramsey-game/static/js/main.ede1a4be.chunk.js.map",
     "runtime-main.js": "/ramsey-game/static/js/runtime-main.2190bb8a.js",
     "runtime-main.js.map": "/ramsey-game/static/js/runtime-main.2190bb8a.js.map",
-    "static/js/2.e6a3e2a4.chunk.js": "/ramsey-game/static/js/2.e6a3e2a4.chunk.js",
-    "static/js/2.e6a3e2a4.chunk.js.map": "/ramsey-game/static/js/2.e6a3e2a4.chunk.js.map",
+    "static/js/2.a76b43ff.chunk.js": "/ramsey-game/static/js/2.a76b43ff.chunk.js",
+    "static/js/2.a76b43ff.chunk.js.map": "/ramsey-game/static/js/2.a76b43ff.chunk.js.map",
     "index.html": "/ramsey-game/index.html",
-    "precache-manifest.9c442e2d7320c64bc09537e0501c6380.js": "/ramsey-game/precache-manifest.9c442e2d7320c64bc09537e0501c6380.js",
+    "precache-manifest.df9ecafa42f70b13545e14e0669100f1.js": "/ramsey-game/precache-manifest.df9ecafa42f70b13545e14e0669100f1.js",
     "service-worker.js": "/ramsey-game/service-worker.js",
-    "static/css/main.1865a723.chunk.css.map": "/ramsey-game/static/css/main.1865a723.chunk.css.map",
-    "static/js/2.e6a3e2a4.chunk.js.LICENSE.txt": "/ramsey-game/static/js/2.e6a3e2a4.chunk.js.LICENSE.txt"
+    "static/css/main.3bc792a1.chunk.css.map": "/ramsey-game/static/css/main.3bc792a1.chunk.css.map",
+    "static/js/2.a76b43ff.chunk.js.LICENSE.txt": "/ramsey-game/static/js/2.a76b43ff.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2190bb8a.js",
-    "static/js/2.e6a3e2a4.chunk.js",
-    "static/css/main.1865a723.chunk.css",
-    "static/js/main.4554147a.chunk.js"
+    "static/js/2.a76b43ff.chunk.js",
+    "static/css/main.3bc792a1.chunk.css",
+    "static/js/main.ede1a4be.chunk.js"
   ]
 }
