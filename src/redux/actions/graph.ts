@@ -1,5 +1,7 @@
 import { ADD_EDGE, CREATE_GRAPH } from '../../constants/actions';
 
+const jsnx = require('jsnetworkx');
+
 export type CreateGraph = {
   type: typeof CREATE_GRAPH;
   payload: {
@@ -7,7 +9,7 @@ export type CreateGraph = {
   };
 };
 
-export const createGraph = (size: number): CreateGraph => {
+export const createGraph = (size: number) => {
   return {
     type: CREATE_GRAPH,
     payload: { size },
@@ -19,12 +21,17 @@ export type AddEdge = {
   payload: {
     source: string;
     target: string;
+    affiliation: 'PLAYER' | 'COMPUTER';
   };
 };
 
-export const addEdge = (source: string, target: string): AddEdge => {
+export const addEdge = (
+  source: string,
+  target: string,
+  affiliation: 'PLAYER' | 'COMPUTER' = 'PLAYER',
+) => {
   return {
     type: ADD_EDGE,
-    payload: { source, target },
+    payload: { source, target, affiliation },
   };
 };

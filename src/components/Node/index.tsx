@@ -1,5 +1,5 @@
 import React from 'react';
-import './Node.css';
+import './styles.css';
 
 export type NodeProps = {
   id: string;

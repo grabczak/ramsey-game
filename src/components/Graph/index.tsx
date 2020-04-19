@@ -1,5 +1,5 @@
 import React from 'react';
-import './Graph.css';
+import './styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Graph as ReactD3Graph } from 'react-d3-graph';
 
