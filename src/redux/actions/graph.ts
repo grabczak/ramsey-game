@@ -26,26 +26,31 @@ export const nextMove = (source: string, target: string) => {
   return async (dispatch: any, getState: () => TRootState) => {
     dispatch(addEdge(source, target, 'player'));
 
-    const { nodes, links } = getState().graph;
-
     const playerGraph = new jsnx.Graph();
 
     playerGraph.addNodesFrom(
-      nodes.map((node: TNode) => Math.floor(Number(node.id))),
+      getState().graph.nodes.map((node: TNode) => Math.floor(Number(node.id))),
     );
 
     playerGraph.addEdgesFrom(
-      links
-        .filter((link: TLink) => link.color === 'green')
+      getState()
+        .graph.links.filter((link: TLink) => link.color === 'green')
         .map((link: TLink) => [
           Math.floor(Number(link.source)),
           Math.floor(Number(link.target)),
         ]),
     );
 
-    console.log('Max clique size:', jsnx.graphCliqueNumber(playerGraph));
+    if (
+      jsnx.graphCliqueNumber(playerGraph) ===
+      getState().options.targetCliqueSize
+    ) {
+      await wait(0.1);
+      alert('Człowiek wygrywa');
+      return;
+    }
 
-    const possibleEdges = links.filter(
+    const possibleEdges = getState().graph.links.filter(
       (link: TLink) => link.color === '#CCCCCC',
     );
 
@@ -56,6 +61,30 @@ export const nextMove = (source: string, target: string) => {
 
     if (newEdge) {
       dispatch(addEdge(newEdge.source, newEdge.target, 'computer'));
+    }
+
+    const computerGraph = new jsnx.Graph();
+
+    computerGraph.addNodesFrom(
+      getState().graph.nodes.map((node: TNode) => Math.floor(Number(node.id))),
+    );
+
+    computerGraph.addEdgesFrom(
+      getState()
+        .graph.links.filter((link: TLink) => link.color === 'red')
+        .map((link: TLink) => [
+          Math.floor(Number(link.source)),
+          Math.floor(Number(link.target)),
+        ]),
+    );
+
+    if (
+      jsnx.graphCliqueNumber(computerGraph) ===
+      getState().options.targetCliqueSize
+    ) {
+      await wait(0.1);
+      alert('Komputer wygrywa');
+      return;
     }
   };
 };
