@@ -27,6 +27,7 @@ export const Form = () => {
 
   useEffect(() => {
     const loading = document.getElementById('loading');
+
     const interval = setInterval(() => {
       if (loading) {
         if (loading.innerHTML.length <= 2) {
@@ -61,9 +62,10 @@ export const Form = () => {
   return (
     <div className="form">
       <div className="row">
-        <p>Rozmiar grafu:</p>
-        <p>{graphSize}</p>
+        <p className="field">Rozmiar grafu:</p>
+        <p className="value">{graphSize}</p>
         <input
+          className="field"
           type="range"
           value={graphSize}
           onChange={handleGraphSizeChange}
@@ -73,9 +75,10 @@ export const Form = () => {
         />
       </div>
       <div className="row">
-        <p>Rozmiar szukanej kliki:</p>
-        <p>{targetCliqueSize}</p>
+        <p className="field">Rozmiar szukanej kliki:</p>
+        <p className="value">{targetCliqueSize}</p>
         <input
+          className="field"
           type="range"
           value={targetCliqueSize}
           onChange={handleTargetCliqueSizeChange}
