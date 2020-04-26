@@ -4,63 +4,52 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Graph as ReactD3Graph } from 'react-d3-graph';
 
 import { Node } from '../Node';
-import { TRootState } from '../../typings/state';
+import { TRootState, TLink } from '../../typings/state';
 import { nextMove } from '../../redux/actions/graph';
 
-import { setGraphSize, setTargetCliqueSize } from '../../redux/actions/options';
-
-export function Graph() {
-  const { graphSize, targetCliqueSize } = useSelector(
-    (state: TRootState) => state.options,
-  );
-
-  const { graph } = useSelector((state: TRootState) => state);
-
-  const dispatch = useDispatch();
-
+export const Graph = () => {
   const config = {
     node: {
       renderLabel: false,
       viewGenerator: (node: any) => <Node id={node.id} />,
     },
     link: {
-      highlightColor: 'green',
-      strokeWidth: 2,
+      strokeWidth: 3,
     },
-    // linkHighlightBehavior: true,
     staticGraph: true,
     width: 500,
     height: 500,
   };
 
+  const graph = useSelector((state: TRootState) => state.graph);
+
+  const isGameRunning = useSelector(
+    (state: TRootState) => state.game.isGameRunning,
+  );
+
+  const dispatch = useDispatch();
+
   const onClickLink = (source: string, target: string) => {
-    dispatch(nextMove(source, target));
+    const link = graph.links.find(
+      (link: TLink) => link.source === source && link.target === target,
+    );
+
+    if (link?.color !== '#CCCCCC') {
+      alert('This edge is taken');
+    } else {
+      dispatch(nextMove(source, target));
+    }
   };
 
   return (
-    <div className="Graph">
-      <p>{graphSize}</p>
-      <input
-        type="range"
-        value={graphSize}
-        onChange={(e) => dispatch(setGraphSize(Number(e.target.value)))}
-        min={4}
-        max={10}
-      />
-      <p>{targetCliqueSize}</p>
-      <input
-        type="range"
-        value={targetCliqueSize}
-        onChange={(e) => dispatch(setTargetCliqueSize(Number(e.target.value)))}
-        min={3}
-        max={graphSize}
-      />
+    <div className="graph">
       <ReactD3Graph
         id="graph"
         data={graph}
         config={config}
         onClickLink={onClickLink}
       />
+      {!isGameRunning && <div className="overlay" />}
     </div>
   );
-}
+};

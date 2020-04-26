@@ -20,7 +20,14 @@ export type TOptionsState = {
   targetCliqueSize: number;
 };
 
+export type TGameState = {
+  isGameRunning: boolean;
+  isComputerTurn: boolean;
+  winner: 'player' | 'computer' | null;
+};
+
 export type TRootState = {
+  game: TGameState;
   graph: TGraphState;
   options: TOptionsState;
 };

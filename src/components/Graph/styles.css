@@ -1,5 +1,16 @@
-.Graph {
+.graph {
   display: flex;
+  width: 500px;
+  height: 500px;
   flex-direction: column;
   align-items: center;
+  border: 2px black solid;
+  border-radius: 5px;
+}
+
+.overlay {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background-color: rgba(255, 255, 255, 0.7);
 }

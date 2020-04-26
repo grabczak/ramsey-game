@@ -5,10 +5,10 @@ export type TNodeProps = {
   id: string;
 };
 
-export function Node({ id }: TNodeProps) {
+export const Node = ({ id }: TNodeProps) => {
   return (
-    <div className="Node">
+    <div className="node">
       <p>{Math.floor(Number(id))}</p>
     </div>
   );
-}
+};

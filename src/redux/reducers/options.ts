@@ -3,13 +3,17 @@ import {
   SET_TARGET_CLIQUE_SIZE,
 } from '../../constants/actions';
 import { TOptionsAction } from '../../typings/actions';
+import { TOptionsState } from '../../typings/state';
 
 const initialState = {
   graphSize: 6,
   targetCliqueSize: 3,
 };
 
-export function options(state = initialState, action: TOptionsAction) {
+export function options(
+  state: TOptionsState = initialState,
+  action: TOptionsAction,
+) {
   switch (action.type) {
     case SET_GRAPH_SIZE:
       return {

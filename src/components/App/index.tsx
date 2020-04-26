@@ -4,14 +4,16 @@ import { Provider } from 'react-redux';
 
 import { store } from '../../redux/store';
 import { Graph } from '../Graph';
+import { Form } from '../Form';
 
-export function App() {
+export const App = () => {
   return (
     <Provider store={store}>
-      <div className="App">
+      <div className="app">
         <h1>Gra Ramseya</h1>
+        <Form />
         <Graph />
       </div>
     </Provider>
   );
-}
+};

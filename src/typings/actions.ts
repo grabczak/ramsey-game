@@ -2,6 +2,8 @@ import {
   ADD_EDGE,
   SET_GRAPH_SIZE,
   SET_TARGET_CLIQUE_SIZE,
+  START_GAME,
+  END_GAME,
 } from '../constants/actions';
 
 export type TSetGraphSize = {
@@ -27,5 +29,14 @@ export type TAddEdge = {
   };
 };
 
-export type TGraphAction = TSetGraphSize | TAddEdge;
+export type TStartGame = {
+  type: typeof START_GAME;
+};
+
+export type TEndGame = {
+  type: typeof END_GAME;
+};
+
+export type TGameAction = TStartGame | TEndGame;
+export type TGraphAction = TSetGraphSize | TAddEdge | TEndGame;
 export type TOptionsAction = TSetGraphSize | TSetTargetCliqueSize;

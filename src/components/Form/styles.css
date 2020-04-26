@@ -1,0 +1,25 @@
+.form {
+  width: 460px;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 20px 20px 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+}
+
+button {
+  width: 130px;
+  height: 40px;
+  margin: 15px 30px 15px 30px;
+  font-size: 15px;
+}
