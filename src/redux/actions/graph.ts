@@ -58,7 +58,11 @@ export const nextMove = (source: string, target: string) => {
       possibleEdges[Math.floor(Math.random() * possibleEdges.length)];
 
     if (newEdge) {
+      await wait(2);
       dispatch(addEdge(newEdge.source, newEdge.target, 'computer'));
+    } else {
+      dispatch(endGame('draw'));
+      return;
     }
 
     const computerGraph = new jsnx.Graph();
@@ -82,6 +86,14 @@ export const nextMove = (source: string, target: string) => {
     ) {
       dispatch(endGame('computer'));
       return;
+    }
+
+    const remainingEdges = getState().graph.links.filter(
+      (link: TLink) => link.color === '#CCCCCC',
+    );
+
+    if (remainingEdges.length === 0) {
+      dispatch(endGame('draw'));
     }
   };
 };

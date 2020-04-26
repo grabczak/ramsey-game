@@ -103,9 +103,20 @@ export const Form = () => {
       {winner ? (
         <p
           className="loading"
-          style={{ color: winner === 'player' ? 'green' : 'red' }}
+          style={{
+            color:
+              winner === 'player'
+                ? 'green'
+                : winner === 'computer'
+                ? 'red'
+                : 'blue',
+          }}
         >
-          {winner === 'player' ? 'Człowiek wygrywa' : 'Komputer wygrywa'}
+          {winner === 'player'
+            ? 'Człowiek wygrywa'
+            : winner === 'computer'
+            ? 'Komputer wygrywa'
+            : 'Remis'}
         </p>
       ) : isGameRunning ? (
         <p className="loading">

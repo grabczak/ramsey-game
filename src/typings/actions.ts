@@ -36,7 +36,7 @@ export type TStartGame = {
 export type TEndGame = {
   type: typeof END_GAME;
   payload: {
-    winner: 'player' | 'computer' | null;
+    winner: 'player' | 'computer' | 'draw' | null;
   };
 };
 

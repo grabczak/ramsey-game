@@ -23,7 +23,7 @@ export type TOptionsState = {
 export type TGameState = {
   isGameRunning: boolean;
   isComputerTurn: boolean;
-  winner: 'player' | 'computer' | null;
+  winner: 'player' | 'computer' | 'draw' | null;
 };
 
 export type TRootState = {
