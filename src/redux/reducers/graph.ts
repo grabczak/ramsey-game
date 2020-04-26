@@ -30,7 +30,10 @@ export function graph(state: TGraphState = initialState, action: TGraphAction) {
         ],
       };
     case END_GAME:
-      return initialState;
+      return {
+        ...state,
+        links: state.links.map((link) => ({ ...link, color: '#CCCCCC' })),
+      };
     default:
       return state;
   }
