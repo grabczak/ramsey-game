@@ -1,4 +1,4 @@
-import { START_GAME, END_GAME } from '../../constants/actions';
+import { START_GAME, END_GAME, ADD_EDGE } from '../../constants/actions';
 import { TGameAction } from '../../typings/actions';
 import { TGameState } from '../../typings/state';
 
@@ -21,6 +21,11 @@ export const game = (state: TGameState = initialState, action: TGameAction) => {
         ...state,
         isGameRunning: false,
         isComputerTurn: false,
+      };
+    case ADD_EDGE:
+      return {
+        ...state,
+        isComputerTurn: action.payload.affiliation === 'player',
       };
     default:
       return state;

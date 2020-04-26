@@ -50,6 +50,8 @@ export const nextMove = (source: string, target: string) => {
       return;
     }
 
+    await wait(5);
+
     const possibleEdges = getState().graph.links.filter(
       (link: TLink) => link.color === '#CCCCCC',
     );

@@ -37,6 +37,6 @@ export type TEndGame = {
   type: typeof END_GAME;
 };
 
-export type TGameAction = TStartGame | TEndGame;
+export type TGameAction = TStartGame | TEndGame | TAddEdge;
 export type TGraphAction = TSetGraphSize | TAddEdge | TEndGame;
 export type TOptionsAction = TSetGraphSize | TSetTargetCliqueSize;

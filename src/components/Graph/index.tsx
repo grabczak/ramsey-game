@@ -27,16 +27,22 @@ export const Graph = () => {
     (state: TRootState) => state.game.isGameRunning,
   );
 
+  const isComputerTurn = useSelector(
+    (state: TRootState) => state.game.isComputerTurn,
+  );
+
   const dispatch = useDispatch();
 
   const onClickLink = (source: string, target: string) => {
+    if (isComputerTurn) {
+      return;
+    }
+
     const link = graph.links.find(
       (link: TLink) => link.source === source && link.target === target,
     );
 
-    if (link?.color !== '#CCCCCC') {
-      alert('This edge is taken');
-    } else {
+    if (link?.color === '#CCCCCC') {
       dispatch(nextMove(source, target));
     }
   };
@@ -48,6 +54,7 @@ export const Graph = () => {
         data={graph}
         config={config}
         onClickLink={onClickLink}
+        y
       />
       {!isGameRunning && <div className="overlay" />}
     </div>
