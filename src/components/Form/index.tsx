@@ -21,6 +21,8 @@ export const Form = () => {
     (state: TRootState) => state.game.isComputerTurn,
   );
 
+  const winner = useSelector((state: TRootState) => state.game.winner);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -98,12 +100,19 @@ export const Form = () => {
           Zakończ grę
         </button>
       </div>
-      {isGameRunning && (
+      {winner ? (
+        <p
+          className="loading"
+          style={{ color: winner === 'player' ? 'green' : 'red' }}
+        >
+          {winner === 'player' ? 'Człowiek wygrywa' : 'Komputer wygrywa'}
+        </p>
+      ) : isGameRunning ? (
         <p className="loading">
           {isComputerTurn ? 'Komputer myśli' : 'Twoja kolej'}
           {isComputerTurn && <span id="loading" />}
         </p>
-      )}
+      ) : null}
     </div>
   );
 };

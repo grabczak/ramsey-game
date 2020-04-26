@@ -31,10 +31,12 @@ export const Graph = () => {
     (state: TRootState) => state.game.isComputerTurn,
   );
 
+  const winner = useSelector((state: TRootState) => state.game.winner);
+
   const dispatch = useDispatch();
 
   const onClickLink = (source: string, target: string) => {
-    if (isComputerTurn) {
+    if (isComputerTurn || winner) {
       return;
     }
 

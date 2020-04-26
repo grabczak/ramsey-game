@@ -1,6 +1,7 @@
 import { ADD_EDGE, CREATE_GRAPH } from '../../constants/actions';
 import { wait } from '../../utils/wait';
 import { TRootState, TNode, TLink } from '../../typings/state';
+import { endGame } from './game';
 
 const jsnx = require('jsnetworkx');
 
@@ -45,12 +46,9 @@ export const nextMove = (source: string, target: string) => {
       jsnx.graphCliqueNumber(playerGraph) ===
       getState().options.targetCliqueSize
     ) {
-      await wait(0.1);
-      alert('Człowiek wygrywa');
+      dispatch(endGame('player'));
       return;
     }
-
-    await wait(5);
 
     const possibleEdges = getState().graph.links.filter(
       (link: TLink) => link.color === '#CCCCCC',
@@ -58,8 +56,6 @@ export const nextMove = (source: string, target: string) => {
 
     const newEdge =
       possibleEdges[Math.floor(Math.random() * possibleEdges.length)];
-
-    await wait(1);
 
     if (newEdge) {
       dispatch(addEdge(newEdge.source, newEdge.target, 'computer'));
@@ -84,8 +80,7 @@ export const nextMove = (source: string, target: string) => {
       jsnx.graphCliqueNumber(computerGraph) ===
       getState().options.targetCliqueSize
     ) {
-      await wait(0.1);
-      alert('Komputer wygrywa');
+      dispatch(endGame('computer'));
       return;
     }
   };

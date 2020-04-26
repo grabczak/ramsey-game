@@ -6,8 +6,9 @@ export const startGame = () => {
   };
 };
 
-export const endGame = () => {
+export const endGame = (winner: 'player' | 'computer' | null = null) => {
   return {
     type: END_GAME,
+    payload: { winner },
   };
 };

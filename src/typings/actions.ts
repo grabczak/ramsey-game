@@ -35,6 +35,9 @@ export type TStartGame = {
 
 export type TEndGame = {
   type: typeof END_GAME;
+  payload: {
+    winner: 'player' | 'computer' | null;
+  };
 };
 
 export type TGameAction = TStartGame | TEndGame | TAddEdge;

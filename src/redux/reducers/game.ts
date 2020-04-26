@@ -19,8 +19,9 @@ export const game = (state: TGameState = initialState, action: TGameAction) => {
     case END_GAME:
       return {
         ...state,
-        isGameRunning: false,
+        isGameRunning: action.payload.winner !== null,
         isComputerTurn: false,
+        winner: action.payload.winner,
       };
     case ADD_EDGE:
       return {
