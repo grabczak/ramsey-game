@@ -54,8 +54,71 @@ export const nextMove = (source: string, target: string) => {
       (link: TLink) => link.color === '#CCCCCC',
     );
 
-    const newEdge =
-      possibleEdges[Math.floor(Math.random() * possibleEdges.length)];
+    // This code needs some serious refactor
+    const findNewEdge = (): any => {
+      return new Promise((resolve) => {
+        const nodes = playerGraph.nodes();
+
+        for (const a of nodes) {
+          for (const b of nodes) {
+            if (a >= b) {
+              continue;
+            }
+
+            const newPlayerGraph = new jsnx.Graph();
+
+            newPlayerGraph.addNodesFrom(
+              getState().graph.nodes.map((node: TNode) =>
+                Math.floor(Number(node.id)),
+              ),
+            );
+
+            newPlayerGraph.addEdgesFrom(
+              getState()
+                .graph.links.filter((link: TLink) => link.color === 'green')
+                .map((link: TLink) => [
+                  Math.floor(Number(link.source)),
+                  Math.floor(Number(link.target)),
+                ]),
+            );
+
+            newPlayerGraph.addEdge(a, b);
+
+            const computerEdges = getState().graph.links.filter(
+              (link: TLink) => link.color === 'red',
+            );
+
+            if (
+              jsnx.graphCliqueNumber(newPlayerGraph) ===
+                getState().options.targetCliqueSize &&
+              !computerEdges.some(
+                (link: TLink) =>
+                  Math.floor(Number(link.source)) === a &&
+                  Math.floor(Number(link.target)) === b,
+              )
+            ) {
+              const newEdge = {
+                source: getState().graph.nodes.find(
+                  (node: TNode) => Math.floor(Number(node.id)) === a,
+                )?.id,
+                target: getState().graph.nodes.find(
+                  (node: TNode) => Math.floor(Number(node.id)) === b,
+                )?.id,
+              };
+
+              resolve(newEdge);
+            }
+          }
+        }
+        resolve(
+          possibleEdges[Math.floor(Math.random() * possibleEdges.length)],
+        );
+      });
+    };
+
+    const newEdge = await findNewEdge();
+
+    console.log(newEdge);
 
     if (newEdge) {
       await wait(2);

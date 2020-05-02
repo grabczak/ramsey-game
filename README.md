@@ -1,4 +1,4 @@
-Available at (https://grabczak.github.io/ramsey-game).
+Available at https://grabczak.github.io/ramsey-game.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
