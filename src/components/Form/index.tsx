@@ -3,22 +3,22 @@ import './styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TRootState } from '../../typings/state';
-import { setGraphSize, setTargetCliqueSize } from '../../redux/actions/options';
+import { setGraphSize, setTargetCliqueSize } from '../../redux/actions/game';
 import { startGame, endGame } from '../../redux/actions/game';
 
 export const Form = () => {
-  const graphSize = useSelector((state: TRootState) => state.options.graphSize);
+  const graphSize = useSelector((state: TRootState) => state.game.nodes.length);
 
   const targetCliqueSize = useSelector(
-    (state: TRootState) => state.options.targetCliqueSize,
+    (state: TRootState) => state.game.targetCliqueSize,
   );
 
   const isGameRunning = useSelector(
     (state: TRootState) => state.game.isGameRunning,
   );
 
-  const isComputerTurn = useSelector(
-    (state: TRootState) => state.game.isComputerTurn,
+  const whoIsMoving = useSelector(
+    (state: TRootState) => state.game.whoIsMoving,
   );
 
   const winner = useSelector((state: TRootState) => state.game.winner);
@@ -41,7 +41,7 @@ export const Form = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [isComputerTurn]);
+  }, [whoIsMoving]);
 
   const handleGraphSizeChange = (e: any) => {
     dispatch(setGraphSize(Number(e.target.value)));
@@ -123,8 +123,8 @@ export const Form = () => {
         </p>
       ) : isGameRunning ? (
         <p className="loading">
-          {isComputerTurn ? 'Komputer myśli' : 'Twoja kolej'}
-          {isComputerTurn && <span id="loading" />}
+          {whoIsMoving === 'computer' ? 'Komputer myśli' : 'Twoja kolej'}
+          {whoIsMoving === 'computer' && <span id="loading" />}
         </p>
       ) : null}
     </div>

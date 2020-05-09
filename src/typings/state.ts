@@ -1,33 +1,22 @@
 export type TNode = {
-  id: string;
-  x: number;
-  y: number;
+  id: number;
 };
 
-export type TLink = {
-  source: string;
-  target: string;
-  color: string;
-};
-
-export type TGraphState = {
-  nodes: Array<TNode>;
-  links: Array<TLink>;
-};
-
-export type TOptionsState = {
-  graphSize: number;
-  targetCliqueSize: number;
+export type TEdge = {
+  source: number;
+  target: number;
+  team: 'player' | 'computer' | null;
 };
 
 export type TGameState = {
+  nodes: TNode[];
+  edges: TEdge[];
+  targetCliqueSize: number;
   isGameRunning: boolean;
-  isComputerTurn: boolean;
+  whoIsMoving: 'player' | 'computer';
   winner: 'player' | 'computer' | 'draw' | null;
 };
 
 export type TRootState = {
   game: TGameState;
-  graph: TGraphState;
-  options: TOptionsState;
 };
