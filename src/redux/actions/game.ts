@@ -198,14 +198,26 @@ export const playerMove = (source: number, target: number) => {
 
     if (newEdge.winningEdge) {
       await wait(2);
+
+      if (!getState().game.isGameRunning) {
+        return;
+      }
+
       dispatch(nextMove(newEdge));
       dispatch(endGame('computer'));
+
       return;
     } else if (newEdge.source || newEdge.target) {
       await wait(2);
+
+      if (!getState().game.isGameRunning) {
+        return;
+      }
+
       dispatch(nextMove(newEdge));
     } else {
       dispatch(endGame('draw'));
+
       return;
     }
 
