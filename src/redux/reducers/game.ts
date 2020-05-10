@@ -53,6 +53,7 @@ export const game = (state: TGameState = initialState, action: TGameAction) => {
     case SET_TARGET_CLIQUE_SIZE:
       return {
         ...state,
+        ...createGraph(state.nodes.length),
         targetCliqueSize: action.payload.size,
         whoIsMoving: 'player',
         winner: null,
