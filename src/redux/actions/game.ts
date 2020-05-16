@@ -5,7 +5,8 @@ import {
   END_GAME,
   NEXT_MOVE,
 } from '../../constants/actions';
-import { TNode, TEdge, TRootState } from '../../typings/state';
+import { TNode, TEdge } from '../../typings/state';
+import { TThunkResult } from '../../typings/actions';
 import { wait } from '../../utils/wait';
 
 const jsnx = require('jsnetworkx');
@@ -46,16 +47,21 @@ export const nextMove = (edge: TEdge) => {
   };
 };
 
-export const playerMove = (source: number, target: number) => {
-  return async (dispatch: any, getState: () => TRootState) => {
+export const playerMove = (
+  source: number,
+  target: number,
+): TThunkResult<Promise<void>> => {
+  return async (dispatch, getState) => {
     const { targetCliqueSize } = getState().game;
 
     dispatch(nextMove({ source, target, team: 'player' }));
 
     const jsnxNodes = getState().game.nodes.map((node: TNode) => node.id);
+
     const jsnxPlayerEdges = getState()
       .game.edges.filter((edge: TEdge) => edge.team === 'player')
       .map((edge: TEdge) => [edge.source, edge.target]);
+
     const jsnxComputerEdges = getState()
       .game.edges.filter((edge: TEdge) => edge.team === 'computer')
       .map((edge: TEdge) => [edge.source, edge.target]);
@@ -68,28 +74,28 @@ export const playerMove = (source: number, target: number) => {
     playerGraph.addNodesFrom(jsnxNodes);
     playerGraph.addEdgesFrom(jsnxPlayerEdges);
 
+    const computerGraph = new jsnx.Graph();
+    computerGraph.addNodesFrom(jsnxNodes);
+    computerGraph.addEdgesFrom(jsnxComputerEdges);
+
     if (jsnx.graphCliqueNumber(playerGraph) === targetCliqueSize) {
       dispatch(endGame('player'));
       return;
     }
 
-    const computerGraph = new jsnx.Graph();
-    computerGraph.addNodesFrom(jsnxNodes);
-    computerGraph.addEdgesFrom(jsnxComputerEdges);
-
     const isAvailable = (source: number, target: number) => {
+      if (source >= target) {
+        return false;
+      }
+
       return availableEdges.some(
         (edge: TEdge) => edge.source === source && edge.target === target,
       );
     };
 
-    const findNewEdge = (): TEdge & { winningEdge: boolean } => {
+    const findNewEdge = () => {
       for (const a of jsnxNodes) {
         for (const b of jsnxNodes) {
-          if (a >= b) {
-            continue;
-          }
-
           const newComputerGraph = new jsnx.Graph();
           newComputerGraph.addNodesFrom(jsnxNodes);
           newComputerGraph.addEdgesFrom(jsnxComputerEdges);
@@ -102,7 +108,6 @@ export const playerMove = (source: number, target: number) => {
             return {
               source: a,
               target: b,
-              team: 'computer',
               winningEdge: true,
             };
           }
@@ -111,10 +116,6 @@ export const playerMove = (source: number, target: number) => {
 
       for (const a of jsnxNodes) {
         for (const b of jsnxNodes) {
-          if (a >= b) {
-            continue;
-          }
-
           const newPlayerGraph = new jsnx.Graph();
           newPlayerGraph.addNodesFrom(jsnxNodes);
           newPlayerGraph.addEdgesFrom(jsnxPlayerEdges);
@@ -127,7 +128,6 @@ export const playerMove = (source: number, target: number) => {
             return {
               source: a,
               target: b,
-              team: 'computer',
               winningEdge: false,
             };
           }
@@ -165,20 +165,18 @@ export const playerMove = (source: number, target: number) => {
 
           return {
             ...edge,
-            team: 'computer',
             winningEdge: false,
           };
         }
 
         for (const computerDegree of computerDegrees) {
           for (const playerDegree of playerDegrees) {
-            const [v1, v2] = [computerDegree[0], playerDegree[0]].sort();
+            const [v1, v2] = [computerDegree[0], playerDegree[0]];
 
             if (isAvailable(v1, v2)) {
               return {
                 source: v1,
                 target: v2,
-                team: 'computer',
                 winningEdge: false,
               };
             }
@@ -192,7 +190,6 @@ export const playerMove = (source: number, target: number) => {
             ...availableEdges[
               Math.floor(Math.random() * availableEdges.length)
             ],
-            team: 'computer',
             winningEdge: false,
           };
         }
@@ -200,13 +197,12 @@ export const playerMove = (source: number, target: number) => {
         if (computerDegrees[0][1] < 4) {
           for (const computerDegree of computerDegrees) {
             for (const playerDegree of playerDegrees) {
-              const [v1, v2] = [computerDegree[0], playerDegree[0]].sort();
+              const [v1, v2] = [computerDegree[0], playerDegree[0]];
 
               if (isAvailable(v1, v2)) {
                 return {
                   source: v1,
                   target: v2,
-                  team: 'computer',
                   winningEdge: false,
                 };
               }
@@ -217,10 +213,6 @@ export const playerMove = (source: number, target: number) => {
         if (jsnxComputerEdges.length === 4) {
           for (const a of jsnxNodes) {
             for (const b of jsnxNodes) {
-              if (a >= b) {
-                continue;
-              }
-
               const newComputerGraph = new jsnx.Graph();
               newComputerGraph.addNodesFrom(jsnxNodes);
               newComputerGraph.addEdgesFrom(jsnxComputerEdges);
@@ -233,7 +225,6 @@ export const playerMove = (source: number, target: number) => {
                 return {
                   source: a,
                   target: b,
-                  team: 'computer',
                   winningEdge: false,
                 };
               }
@@ -241,17 +232,19 @@ export const playerMove = (source: number, target: number) => {
           }
         }
 
-        for (let i = 0; i < computerDegrees.length; i++) {
-          for (let j = 0; j < computerDegrees.length; j++) {
-            if (i === 0 || j === 0) {
+        for (const v1 of computerDegrees) {
+          for (const v2 of computerDegrees) {
+            if (
+              v1[1] === computerDegrees[0][1] ||
+              v2[1] === computerDegrees[0][1]
+            ) {
               continue;
             }
 
-            if (isAvailable(computerDegrees[i][0], computerDegrees[j][0])) {
+            if (isAvailable(v1[0], v2[0])) {
               return {
-                source: computerDegrees[i][0],
-                target: computerDegrees[j][0],
-                team: 'computer',
+                source: v1[0],
+                target: v2[0],
                 winningEdge: false,
               };
             }
@@ -261,7 +254,6 @@ export const playerMove = (source: number, target: number) => {
 
       return {
         ...availableEdges[Math.floor(Math.random() * availableEdges.length)],
-        team: 'computer',
         winningEdge: false,
       };
     };
@@ -269,13 +261,19 @@ export const playerMove = (source: number, target: number) => {
     const newEdge = findNewEdge();
 
     if (newEdge.winningEdge || newEdge.source || newEdge.target) {
-      // await wait(2);
+      await wait(2);
 
       if (!getState().game.isGameRunning) {
         return;
       }
 
-      dispatch(nextMove(newEdge));
+      dispatch(
+        nextMove({
+          source: newEdge.source,
+          target: newEdge.target,
+          team: 'computer',
+        }),
+      );
 
       if (newEdge.winningEdge) {
         dispatch(endGame('computer'));
@@ -295,70 +293,3 @@ export const playerMove = (source: number, target: number) => {
     }
   };
 };
-
-// function getCycles(graph: any) {
-//   let cycles: any = [];
-
-//   function findNewCycles(graph: any, path: any) {
-//     const startNode = path[0];
-//     let nextNode = null;
-//     let sub = [];
-
-//     console.log('e');
-
-//     for (const edge of graph) {
-//       const [node1, node2] = edge;
-//       if (edge.includes(startNode)) {
-//         nextNode = node1 === startNode ? node2 : node1;
-//       }
-//       if (notVisited(nextNode, path)) {
-//         sub = [nextNode].concat(path);
-//         findNewCycles(graph, sub);
-//       } else if (path.length > 2 && nextNode === path[path.length - 1]) {
-//         const p = rotateToSmallest(path);
-//         const inv = invert(p);
-//         if (isNew(p) && isNew(inv)) {
-//           cycles.push(p);
-//         }
-//       }
-//     }
-//   }
-
-//   function invert(path: any) {
-//     return rotateToSmallest([...path].reverse());
-//   }
-
-//   function rotateToSmallest(path: any) {
-//     const n = path.indexOf(Math.min(...path));
-//     return path.slice(n).concat(path.slice(0, n));
-//   }
-
-//   function isNew(path: any) {
-//     const p = JSON.stringify(path);
-
-//     for (const cycle of cycles) {
-//       if (p === JSON.stringify(cycle)) {
-//         return false;
-//       }
-//     }
-//     return true;
-//   }
-
-//   function notVisited(node: any, path: any) {
-//     const n = JSON.stringify(node);
-//     for (const p of path) {
-//       if (n === JSON.stringify(p)) {
-//         return false;
-//       }
-//     }
-//     return true;
-//   }
-
-//   for (const edge of graph) {
-//     for (const node of edge) {
-//       findNewCycles(graph, [node]);
-//     }
-//   }
-
-//   return cycles;
-// }

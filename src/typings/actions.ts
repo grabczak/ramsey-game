@@ -1,3 +1,6 @@
+import { Action } from 'redux';
+import { ThunkAction } from 'redux-thunk';
+
 import {
   SET_GRAPH_SIZE,
   SET_TARGET_CLIQUE_SIZE,
@@ -5,7 +8,9 @@ import {
   END_GAME,
   NEXT_MOVE,
 } from '../constants/actions';
-import { TEdge } from './state';
+import { TEdge, TRootState } from './state';
+
+export type TThunkResult<R> = ThunkAction<R, TRootState, null, Action>;
 
 export type TSetGraphSize = {
   type: typeof SET_GRAPH_SIZE;
