@@ -8,7 +8,7 @@ export type TNodeProps = {
 export const Node = ({ id }: TNodeProps) => {
   return (
     <div className="node">
-      <p>{id}</p>
+      <p>{id + 1}</p>
     </div>
   );
 };
