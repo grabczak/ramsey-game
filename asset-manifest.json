@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/ramsey-game/static/css/main.c5890c01.chunk.css",
-    "main.js": "/ramsey-game/static/js/main.587dcbd3.chunk.js",
-    "main.js.map": "/ramsey-game/static/js/main.587dcbd3.chunk.js.map",
+    "main.js": "/ramsey-game/static/js/main.97796d8e.chunk.js",
+    "main.js.map": "/ramsey-game/static/js/main.97796d8e.chunk.js.map",
     "runtime-main.js": "/ramsey-game/static/js/runtime-main.2190bb8a.js",
     "runtime-main.js.map": "/ramsey-game/static/js/runtime-main.2190bb8a.js.map",
-    "static/js/2.83f6d668.chunk.js": "/ramsey-game/static/js/2.83f6d668.chunk.js",
-    "static/js/2.83f6d668.chunk.js.map": "/ramsey-game/static/js/2.83f6d668.chunk.js.map",
+    "static/js/2.e5575709.chunk.js": "/ramsey-game/static/js/2.e5575709.chunk.js",
+    "static/js/2.e5575709.chunk.js.map": "/ramsey-game/static/js/2.e5575709.chunk.js.map",
     "index.html": "/ramsey-game/index.html",
-    "precache-manifest.ff042a0de59a7a2dda4d676b0be9a76b.js": "/ramsey-game/precache-manifest.ff042a0de59a7a2dda4d676b0be9a76b.js",
+    "precache-manifest.e2fa7d38925da4f94441250ca1fe2470.js": "/ramsey-game/precache-manifest.e2fa7d38925da4f94441250ca1fe2470.js",
     "service-worker.js": "/ramsey-game/service-worker.js",
     "static/css/main.c5890c01.chunk.css.map": "/ramsey-game/static/css/main.c5890c01.chunk.css.map",
-    "static/js/2.83f6d668.chunk.js.LICENSE.txt": "/ramsey-game/static/js/2.83f6d668.chunk.js.LICENSE.txt"
+    "static/js/2.e5575709.chunk.js.LICENSE.txt": "/ramsey-game/static/js/2.e5575709.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2190bb8a.js",
-    "static/js/2.83f6d668.chunk.js",
+    "static/js/2.e5575709.chunk.js",
     "static/css/main.c5890c01.chunk.css",
-    "static/js/main.587dcbd3.chunk.js"
+    "static/js/main.97796d8e.chunk.js"
   ]
 }
