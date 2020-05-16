@@ -234,10 +234,9 @@ export const playerMove = (
 
         for (const v1 of computerDegrees) {
           for (const v2 of computerDegrees) {
-            if (
-              v1[1] === computerDegrees[0][1] ||
-              v2[1] === computerDegrees[0][1]
-            ) {
+            const maxDegree = computerDegrees[0][1];
+
+            if (v1[1] === maxDegree || v2[1] === maxDegree) {
               continue;
             }
 
