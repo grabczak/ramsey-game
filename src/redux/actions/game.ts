@@ -171,7 +171,7 @@ export const playerMove = (
 
         for (const computerDegree of computerDegrees) {
           for (const playerDegree of playerDegrees) {
-            const [v1, v2] = [computerDegree[0], playerDegree[0]];
+            const [v1, v2] = [computerDegree[0], playerDegree[0]].sort();
 
             if (isAvailable(v1, v2)) {
               return {
@@ -197,7 +197,7 @@ export const playerMove = (
         if (computerDegrees[0][1] < 4) {
           for (const computerDegree of computerDegrees) {
             for (const playerDegree of playerDegrees) {
-              const [v1, v2] = [computerDegree[0], playerDegree[0]];
+              const [v1, v2] = [computerDegree[0], playerDegree[0]].sort();
 
               if (isAvailable(v1, v2)) {
                 return {
@@ -232,22 +232,40 @@ export const playerMove = (
           }
         }
 
-        for (const v1 of computerDegrees) {
-          for (const v2 of computerDegrees) {
-            const maxDegree = computerDegrees[0][1];
+        const maxDegree = computerDegrees[0][1];
 
-            if (v1[1] === maxDegree || v2[1] === maxDegree) {
+        let maxSum = 0;
+        let v1 = null;
+        let v2 = null;
+
+        for (const a of computerDegrees) {
+          for (const b of computerDegrees) {
+            const sourceDegree = a[1];
+            const targetDegree = b[1];
+
+            if (sourceDegree === maxDegree || targetDegree === maxDegree) {
               continue;
             }
 
-            if (isAvailable(v1[0], v2[0])) {
-              return {
-                source: v1[0],
-                target: v2[0],
-                winningEdge: false,
-              };
+            const sum = a[1] + b[1];
+
+            const source = a[0];
+            const target = b[0];
+
+            if (sum >= maxSum && isAvailable(source, target)) {
+              maxSum = sum;
+              v1 = source;
+              v2 = target;
             }
           }
+        }
+
+        if (v1 !== null && v2 !== null) {
+          return {
+            source: v1,
+            target: v2,
+            winningEdge: false,
+          };
         }
       }
 
