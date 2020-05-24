@@ -211,20 +211,20 @@ export const playerMove = (
         }
 
         if (jsnxComputerEdges.length === 4) {
-          for (const a of jsnxNodes) {
-            for (const b of jsnxNodes) {
+          for (const a of playerDegrees) {
+            for (const b of playerDegrees) {
               const newComputerGraph = new jsnx.Graph();
               newComputerGraph.addNodesFrom(jsnxNodes);
               newComputerGraph.addEdgesFrom(jsnxComputerEdges);
-              newComputerGraph.addEdge(a, b);
+              newComputerGraph.addEdge(a[0], b[0]);
 
               if (
-                isAvailable(a, b) &&
+                isAvailable(a[0], b[0]) &&
                 jsnx.graphCliqueNumber(newComputerGraph) === 3
               ) {
                 return {
-                  source: a,
-                  target: b,
+                  source: a[0],
+                  target: b[0],
                   winningEdge: false,
                 };
               }
