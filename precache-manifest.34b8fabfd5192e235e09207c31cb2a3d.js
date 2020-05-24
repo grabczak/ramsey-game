@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "58220ded6c78922406fcc89151c6e00c",
+    "revision": "5ffbaeab272dfbf765f8c2e2b0944a56",
     "url": "/ramsey-game/index.html"
   },
   {
-    "revision": "cffc821aeb8a6f36aa36",
-    "url": "/ramsey-game/static/css/main.c5890c01.chunk.css"
+    "revision": "8f6b4e425afaee793249",
+    "url": "/ramsey-game/static/css/main.667b686a.chunk.css"
   },
   {
     "revision": "c53783cf105cd0f8c58b",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ramsey-game/static/js/2.e5575709.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "cffc821aeb8a6f36aa36",
+    "revision": "8f6b4e425afaee793249",
     "url": "/ramsey-game/static/js/main.01a1a1dd.chunk.js"
   },
   {
